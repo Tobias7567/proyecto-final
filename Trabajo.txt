@@ -1,0 +1,26 @@
+[
+  {
+    "nombre": "negroni",
+    "precio": "666",
+    "descripcion": "trago",
+    "id": 1
+  },
+  {
+    "id": 2,
+    "nombre": "Teresita",
+    "precio": "666",
+    "descripcion": "2222"
+  },
+  {
+    "nombre": "Tobias",
+    "precio": "666",
+    "descripcion": "description",
+    "id": 11
+  },
+  {
+    "nombre": "Tobias",
+    "precio": "666",
+    "descripcion": "description",
+    "id": 12
+  }
+]
