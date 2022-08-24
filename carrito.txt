@@ -1,0 +1,18 @@
+[
+  {
+    "nombre": "negroni",
+    "precio": "666",
+    "descripcion": "trago",
+    "hora": "9:26:52",
+    "cantidad": 1,
+    "id": 4
+  },
+  {
+    "nombre": "negroni",
+    "precio": "666",
+    "descripcion": "trago",
+    "hora": "9:26:53",
+    "cantidad": 1,
+    "id": 5
+  }
+]

@@ -1,6 +1,4 @@
-
 const server2 = io().connect();
-
 
 const modproducto = (evt) => {
   const id = document.querySelector("#id").value;
@@ -8,10 +6,10 @@ const modproducto = (evt) => {
   const precio = document.querySelector("#preciomod").value;
   const descripcion = document.querySelector("#descripcionmod").value;
 
-  const producto = {id, nombre, precio, descripcion };
+  const producto = { id, nombre, precio, descripcion };
   // console.log(producto)
-  server2.emit("producto-modificado", producto)
+  server2.emit("producto-modificado", producto);
   return false;
 };
 
-/* Listening for a message from the server. */
+
