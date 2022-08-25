@@ -4,11 +4,14 @@ class Conteiner {
   constructor(ruta) {
     this.ruta = ruta;
   }
-
+async readFileFunction(ruta){
+  let data = await fs.promises.readFile(this.ruta, "utf-8");
+  let dataParse = JSON.parse(data);
+  return dataParse
+}
   async save(obj) {
     try {
-      let data = await fs.promises.readFile(this.ruta, "utf-8");
-      let dataParse = JSON.parse(data);
+   let dataParse = await this.readFileFunction(this.ruta)
       if (dataParse.length) {
         await fs.promises.writeFile(
           this.ruta,
@@ -32,8 +35,7 @@ class Conteiner {
   async upById(obj) {
     console.log(obj);
     try {
-      let data = await fs.promises.readFile(this.ruta, "utf-8");
-      let dataParse = JSON.parse(data);
+      let dataParse = await this.readFileFunction(this.ruta)
       const objIndex = dataParse.findIndex((prod) => prod.id === obj.id);
       if (objIndex !== -1) {
         dataParse[objIndex] = obj;
@@ -52,8 +54,7 @@ class Conteiner {
   }
   async getById(id) {
     try {
-      let data = await fs.promises.readFile(this.ruta, "utf-8");
-      let dataParse = JSON.parse(data);
+      let dataParse = await this.readFileFunction(this.ruta)
       let producto = dataParse.find((producto) => producto.id === id);
       if (producto) {
         return console.log(producto);
@@ -64,11 +65,9 @@ class Conteiner {
   }
   async bringAll() {
     try {
-      let data = await fs.promises.readFile(this.ruta, "utf-8");
-  
-      let dataParse = JSON.parse(data);
-  
+      let dataParse = await this.readFileFunction(this.ruta)
       if (dataParse.length) {
+        console.log(dataParse)
         return dataParse;
       } else {
         console.log("el archivo esta vacio");
@@ -80,11 +79,10 @@ class Conteiner {
   async deleteForId(id) {
     console.log(id)
     try {
-      let data = await fs.promises.readFile(this.ruta, "utf-8");
-      let dataPars =  JSON.parse(data);
-      let producto = dataPars.find((producto) => producto.id === id);
+      let dataParse = await this.readFileFunction(this.ruta)
+      let producto = dataParse.find((producto) => producto.id === id);
       if (producto) {
-        const dataParseFilter = dataPars.filter((produc) => produc.id !== id);
+        const dataParseFilter = dataParse.filter((produc) => produc.id !== id);
         await fs.promises.writeFile(
           this.ruta,
           JSON.stringify(dataParseFilter, null, 2),

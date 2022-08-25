@@ -15,9 +15,15 @@ const io = new IOServer(httpServer);
 
 app.use(express.static("public"));
 
-console.log(__dirname)
+
 routerProductos.get("/", (req, res) => {
+  try{
     res.sendFile("index.html");
+  }
+  catch(error){
+    console.log(error)
+  }
+
 });
 routerProductos.get("/carrito",  (req, res) => {
   try {
@@ -29,79 +35,116 @@ routerProductos.get("/carrito",  (req, res) => {
 });
 
 io.on("connection", async (socket) => {
-  console.log(socket.id)
-  let productos = await conteiner.bringAll();
-  const mensaje = {
-    productos,
-  };
-  socket.emit("mensaje-servidor", mensaje);
-
-  
-  socket.on("producto-nuevo", async (producto) => {
-    console.log(producto)
-    conteiner.save(producto);
+  try {
+   
     let productos = await conteiner.bringAll();
     const mensaje = {
       productos,
     };
-    io.sockets.emit("mensaje-servidor", mensaje);
+    socket.emit("mensaje-servidor", mensaje);
+  } catch (error) {
+    console.log(error)
+  }
+  socket.on("producto-nuevo", async (producto) => {
+    try {
+    await conteiner.save(producto);
+    let productos = await conteiner.bringAll();
+    
+    const mensaje = {
+      productos,
+    };
+    io.sockets.emit("mensaje-servidor2", mensaje);
+    } catch (error) {
+      console.log(error)
+    }
+   
   });
 //modificar producto
   socket.on("producto-modificado", async (datos) => {
-   console.log(datos.id)
-   let producto = {
-       nombre : datos.nombre ,
-       precio : datos.precio,
-       descripcion : datos.descripcion
-   }
-conteiner.upById({id: parseInt(datos.id) , ...producto })
-//enviamos la lista de productos nueva
-let productos = await conteiner.bringAll();
-const mensaje = {
-  productos,
-};
-io.sockets.emit("mensaje-servidor2", mensaje);
+    try {
+      console.log(datos.id)
+      let producto = {
+          nombre : datos.nombre ,
+          precio : datos.precio,
+          descripcion : datos.descripcion
+      }
+     
+      await conteiner.upById({id: parseInt(datos.id) , ...producto })
+    //enviamos la lista de productos nueva
+    let productos = await conteiner.bringAll();
+    const mensaje = {
+     productos,
+    };
+    io.sockets.emit("mensaje-servidor2", mensaje);
+    } catch (error) {
+      console.log(error)
+    }
+
+
   });
 
 // delete for id
   socket.on("producto-borrar", async (id) => {
-idParse = parseInt(id)
- conteiner.deleteForId(idParse)
+    try {
+      idParse = parseInt(id)
+      await conteiner.deleteForId(idParse)
  //enviamos la lista de productos nueva
  let productos = await conteiner.bringAll();
  const mensaje = {
    productos,
  };
  io.sockets.emit("mensaje-servidor2", mensaje);
+    } catch (error) {
+      console.log(error)
+    }
+
    });
    
 
    //agregar al carrito
    socket.on("agregar-carrito", async (producto) => {
-carrito.save(producto)
-   console.log(producto)
+    try {
+      carrito.save(producto)
+    } catch (error) {
+      
+    }
+
+  
   });
-  //mostrar productos del carrito 
+
+ 
 
 });
 io.on("connection", async (socket) => {
+  try {
+       //mostrar productos del carrito ;
+    let productos = await carrito.bringAll()
+  
+    const mensaje = {
+      productos,
+    };
+    socket.emit("mensaje-servidor6", mensaje);
+  } catch (error) {
+    console.log(error)
+  }
 
-  let productos = await carrito.bringAll();
-  const mensaje = {
-    productos,
-  };
-  socket.emit("mensaje-servidor6", mensaje);
+
 
   // delete for id carrito
   socket.on("producto-borrar-carrito", async (id) => {
-    idParse = parseInt(id)
-     carrito.deleteForId(idParse)
+    try {
+      idParse = parseInt(id)
+      await carrito.deleteForId(idParse)
      //enviamos la lista de productos nueva de carrito 
      let productos = await carrito.bringAll();
      const mensaje = {
        productos,
      };
      io.sockets.emit("mensaje-servidor7", mensaje);
+    } catch (error) {
+      console.log(error)
+    }
+    
        });
 })
 app.use("/", routerProductos)

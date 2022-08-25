@@ -113,7 +113,8 @@ const formAddProducto = () => {
   addUbi.innerHTML = formAddProducto;
 };
 
-const render = (productos) => {
+ const render = (productos) => {
+  console.log(productos)
   let administrador = true;
   if (administrador) {
     let listado = document.querySelector("#listado");
@@ -153,8 +154,16 @@ const render = (productos) => {
   }
 };
 server.on("mensaje-servidor", (mensaje) => {
+  console.log("holaa")
   render(mensaje.productos);
 });
+
 server.on("mensaje-servidor2", (mensaje) => {
+  console.log("soy 2")
   render(mensaje.productos);
-});
+})
+
+
+
+
+
