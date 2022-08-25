@@ -42,14 +42,14 @@ const modFormProducto = () => {
           />
         </div>
         <div class="form-group">
-          <label for="descripcion"> descripcion:</label>
+          <label for="url"> image url:</label>
           <input
             type="text"
             class="form-control"
             required="required"
-            id="descripcionmod"
-            name="descripcion"
-            placeholder="descripcion"
+            id="urlmod"
+            name="url"
+            placeholder="url"
           />
         </div>
         <br />
@@ -94,14 +94,14 @@ const formAddProducto = () => {
         />
       </div>
       <div class="form-group">
-        <label for="descripcion">descripcion:</label>
+        <label for="url">image url</label>
         <input
           type="text"
           class="form-control"
           required="required"
-          id="descripcion"
-          name="descripcion"
-          placeholder="descripcion"
+          id="url"
+          name="url"
+          placeholder="url"
         />
       </div>
       <br />
@@ -114,45 +114,57 @@ const formAddProducto = () => {
 };
 
  const render = (productos) => {
-  console.log(productos)
+  formAddProducto();
+  modFormProducto();
   let administrador = true;
+  if(productos !== undefined){ 
   if (administrador) {
+ 
     let listado = document.querySelector("#listado");
 
     let html = productos.map((prod) => {
       return `
           <div class="card" style="width: 18rem;">
+                        <img  id="url" src=${prod.url}>
                          <h5 class="card-title">${prod.id} </h5>
-                         <h5 class="card-title" id="nombre">${prod.nombre}</h5>
-                         <h5 class="card-title" id="precio">${prod.precio}</h5>
-                         <h5 class="card-title"id="descripcion">${prod.descripcion}</h5>
-                         <h5 class="card-title">${prod.hora}</h5>
+                         <h5 class="card-title" id="nombre">producto:${prod.nombre}</h5>
+                         <h5 class="card-title" id="precio">precio:${prod.precio}</h5>
+                       
+                         <h5 class="card-title">hora de add${prod.hora}</h5>
                          <input type="submit" class="agregar-carrito"  value="agregar al carrito"/>
                          <input type="submit" class="borrar-producto" id="${prod.id}" value="x"/>        
            </div>
     `;
     });
     listado.innerHTML = html.join(" ");
-    formAddProducto();
-    modFormProducto();
+
 
   
   } else {
     let listado = document.querySelector("#listado");
     let html = productos.map((prod) => {
       return `   <div class="card" style="width: 18rem;">
-                            <h5 class="card-title" id="nombre">${prod.nombre}</h5>
-                            <h5 class="card-title" id="precio">${prod.precio}</h5>
-                            <h5 class="card-title"id="descripcion">${prod.descripcion}</h5>
-                            <h5 class="card-title">${prod.hora}</h5>
+                            <img  id="url" src=${prod.url}>
+                            <h5 class="card-title" id="nombre">producto;${prod.nombre}</h5>
+                            <h5 class="card-title" id="precio">precio:${prod.precio}</h5>
+                            <h5 class="card-title">hora de add ${prod.hora}</h5>
                             <input type="submit" class="agregar-carrito"  value="agregar al carrito"/>
                             <input type="submit" class="borrar-producto" id="${prod.id}" value="x"/>
      
                       </div>`;
     });
     listado.innerHTML = html;
+  }}
+  else{
+    let listado = document.querySelector("#listado");
+
+    let html = `
+       <h3>no hay productos </h3>
+        `;
+        listado.innerHTML = html
+    };
   }
-};
+;
 server.on("mensaje-servidor", (mensaje) => {
   console.log("holaa")
   render(mensaje.productos);

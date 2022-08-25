@@ -7,7 +7,7 @@ add.addEventListener("click",
         const datos = {
             nombre: datosProducto.querySelector("#nombre").textContent,
             precio: datosProducto.querySelector("#precio").textContent,
-            descripcion: datosProducto.querySelector("#descripcion").textContent,
+            url: datosProducto.querySelector("#url").textContent,
              hora : new Date().toLocaleTimeString() ,
             cantidad: 1,
           };

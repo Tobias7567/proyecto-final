@@ -66,7 +66,8 @@ io.on("connection", async (socket) => {
       let producto = {
           nombre : datos.nombre ,
           precio : datos.precio,
-          descripcion : datos.descripcion
+          url : datos.url ,
+          hora : datos.hora
       }
      
       await conteiner.upById({id: parseInt(datos.id) , ...producto })
@@ -99,8 +100,6 @@ io.on("connection", async (socket) => {
     }
 
    });
-   
-
    //agregar al carrito
    socket.on("agregar-carrito", async (producto) => {
     try {
@@ -108,11 +107,7 @@ io.on("connection", async (socket) => {
     } catch (error) {
       
     }
-
-  
   });
-
- 
 
 });
 io.on("connection", async (socket) => {
