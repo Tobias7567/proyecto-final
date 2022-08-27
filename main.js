@@ -103,7 +103,12 @@ io.on("connection", async (socket) => {
    //agregar al carrito
    socket.on("agregar-carrito", async (producto) => {
     try {
-      carrito.save(producto)
+      await carrito.save(producto)
+      let productos = await carrito.bringAll();
+      const mensaje = {
+        productos,
+      };
+      io.sockets.emit("mensaje-servidor9", mensaje);
     } catch (error) {
       
     }
@@ -122,9 +127,6 @@ io.on("connection", async (socket) => {
   } catch (error) {
     console.log(error)
   }
-
-
-
   // delete for id carrito
   socket.on("producto-borrar-carrito", async (id) => {
     try {
