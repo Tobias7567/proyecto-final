@@ -1,23 +1,129 @@
-[
-  {
-    "nombre": "helado",
-    "precio": "300",
-    "url": "https://www.google.com/search?q=fotos+de+helado&rlz=1C1ALOY_esAR970AR970&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjTnIOAw-L5AhW1hM4BHWQTDTsQ_AUoAXoECAEQAw&biw=1366&bih=617&dpr=1#imgrc=8T6uPn6K_GPc6M",
-    "hora": "14:47:53",
-    "id": 1
-  },
-  {
-    "nombre": "hamburgesa",
-    "precio": "500",
-    "url": "https://www.google.com/search?q=hamburguesas&rlz=1C1ALOY_esAR970AR970&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjKz4K0xuL5AhVE8IUKHfXIATkQ_AUoAnoECAMQBA&biw=1366&bih=617&dpr=1#imgrc=lWmgcF3Ug4bqSM",
+
+use ecommercer2
+db.createCollection("productos")  crear collecion productos
+db.createCollection("mensajes")crear colecion mensajes
+insertar productos
+db.productos.insertMany([
+        {
+        "nombre" : "fideos",
+        "precio" : 2000,
+        "url" : "url1"
+},
+{
+        "nombre" : "fideos",
+        "precio" : 2000,
+        "url" : "url2"
+},
+{
+        "nombre" : "albondigas",
+        "precio" : 4000,
+        "url" : "url3"
+},
+{
+        "nombre" : "fideos",
+        "precio" : 600,
+        "url" : "url4"
+},
+{
+        "nombre" : "fideos",
+        "precio" : 2000,
+        "url" : "url5"
+},
+{ 
+        "nombre" : "fideos",
+        "precio" : 4300,
+        "url" : "url6"
+},
+{     
+        "nombre" : "fideos",
+        "precio" : 2000,
+        "url" : "url7"
+},
+{
+        "nombre" : "fideos",
+        "precio" : 1500,
+        "url" : "url8"
+},
+{ 
+        "nombre" : "fideos",
+        "precio" : 1000,
+        "url" : "url9"
+},
+{ 
+        "nombre" : "fideos",
+        "precio" : 606,
+        "url" : "url10"}])
+
+insertar mensajes
+db.mensajes.insertMany([{
+    "gmail": "usuario1@gmail.com",
+    "mensaje": "hola1" ,
     "hora": "14:48:18",
-    "id": 2
-  },
+
+  }, {
+    "gmail": "usuario2@gmail.com",
+    "mensaje": "hola12" ,
+    "hora": "14:42:18",
+  }, 
   {
-    "nombre": "hamburgusea  con queso ",
-    "precio": "666",
-    "url": "https://www.google.com/search?q=hamburguesas&rlz=1C1ALOY_esAR970AR970&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjKz4K0xuL5AhVE8IUKHfXIATkQ_AUoAnoECAMQBA&biw=1366&bih=617&dpr=1#imgrc=lWmgcF3Ug4bqSM",
-    "hora": "14:48:36",
-    "id": 3
-  }
-]
+    "gmail": "usuario3@gmail.com",
+    "mensaje": "hola3" ,
+    "hora": "14:48:18",
+  },
+   {
+    "gmail": "usuario4@gmail.com",
+    "mensaje": "hola4" ,
+    "hora": "14:48:18",
+
+  },
+   {
+    "gmail": "usuario5@gmail.com",
+    "mensaje": "hola5" ,
+    "hora": "14:48:18",
+
+  },
+   {
+    "gmail": "usuario6@gmail.com",
+    "mensaje": "hola6" ,
+    "hora": "14:48:18",
+
+  },
+   {
+    "gmail": "usuario7@gmail.com",
+    "mensaje": "hola7" ,
+    "hora": "14:48:18",
+
+  },
+   {
+    "gmail": "usuario8@gmail.com",
+    "mensaje": "hola8" ,
+    "hora": "14:48:18",
+
+  },
+   {
+    "gmail": "usuario9@gmail.com",
+    "mensaje": "hola9" ,
+    "hora": "14:65:18",
+
+  },
+   {
+    "gmail": "usuario10@gmail.com",
+    "mensaje": "hola10" ,
+    "hora": "15:52:18",
+
+  }])
+
+db.mensajes.countDocuments() cantidad de documentos
+db.productos.countDocuments()
+db.productos.insertOne({"nombre" : "hamburgesa" , "precio" : 4000 , "url" : "url11"}) insertar un documento
+db.productos.find().pretty() ver productos
+db.mensajes.find().pretty() ver mensajes
+db.productos.find({precio: {$lt:1000}}) mostrar productos con precio menor a 1000
+db.productos.find({precio:{$gte:3000}}) mostrar productos con precio mayor o igual a 3000
+db.productos.find().sort({precio: 1}).limit(1).skip(2) mostar el teercer producto mas barato
+db.productos.updateMany({}, {$set: {stock: 100}}) crear stock
+db.productos.updateMany({precio: {$gt: 4000}}, {$set: {stock: 0}}) modificar el stock en productos con precio mayor a 4000
+db.productos.deleteMany({precio: {$lt: 1000}}) borrar productos con precio menor a 1000
+
+use admin 
+db.createUser({user:"pepe" , pwd:"asd456", roles: [{role : "read" , db:"ecommercer2"}]})

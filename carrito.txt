@@ -1,50 +1,26 @@
 [
   {
-    "nombre": "producto:hamburgesa",
-    "precio": "precio:1000",
-    "url": "",
-    "hora": "14:45:08",
-    "cantidad": 1,
-    "id": 1
-  },
-  {
-    "nombre": "producto:hamburgesa",
-    "precio": "precio:1000",
-    "url": "",
-    "hora": "14:45:08",
-    "cantidad": 1,
-    "id": 2
-  },
-  {
-    "nombre": "producto:hamburgesa",
-    "precio": "precio:1000",
-    "url": "",
-    "hora": "14:45:08",
-    "cantidad": 1,
-    "id": 3
-  },
-  {
-    "nombre": "producto:hamburgesa",
-    "precio": "precio:1000",
-    "url": "",
-    "hora": "14:45:08",
-    "cantidad": 1,
-    "id": 4
-  },
-  {
     "nombre": "producto:helado",
     "precio": "precio:300",
     "url": "",
-    "hora": "14:48:38",
+    "hora": "7:52:40",
     "cantidad": 1,
-    "id": 5
+    "id": 8
+  },
+  {
+    "nombre": "producto:fideos",
+    "precio": "precio:666",
+    "url": "",
+    "hora": "13:22:18",
+    "cantidad": 1,
+    "id": 9
   },
   {
     "nombre": "producto:hamburgesa",
     "precio": "precio:500",
     "url": "",
-    "hora": "14:48:39",
+    "hora": "13:22:21",
     "cantidad": 1,
-    "id": 6
+    "id": 10
   }
 ]

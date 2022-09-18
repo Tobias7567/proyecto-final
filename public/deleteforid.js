@@ -5,6 +5,7 @@ borrar.addEventListener("click",
   if (e.target.classList.contains("borrar-producto")) {
     const id = e.target.getAttribute("id");
     server3.emit("producto-borrar", id)
+    console.log(`enviado el id ${id}`)
     return false;
     }
  else{

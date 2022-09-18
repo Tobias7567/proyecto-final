@@ -170,10 +170,6 @@ server.on("mensaje-servidor", (mensaje) => {
   render(mensaje.productos);
 });
 
-server.on("mensaje-servidor2", (mensaje) => {
-  console.log("soy 2")
-  render(mensaje.productos);
-})
 
 
 
